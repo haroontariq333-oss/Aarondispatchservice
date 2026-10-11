@@ -21,7 +21,6 @@ Repo **Settings → Pages → Build and deployment → Deploy from a branch**, p
 
 ## Things to update
 
-- **Facebook link**: the footer points to `facebook.com/aarondispatchservice`. Change the `facebook-link` href in `index.html` if your page URL is different.
 - **Phone / WhatsApp**: none is listed yet. Add one to the contact list in the "Get started" section.
 - **Lead form**: the form opens the visitor's email app with their details filled in, addressed to `aarondispatchservice@gmail.com`. To receive submissions without that step, connect a form service like Formspree and point the form at it.
 - **First week at 0%**: remove the hero card and the FAQ entry if the offer ends.
