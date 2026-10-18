@@ -22,6 +22,5 @@ Repo **Settings → Pages → Build and deployment → Deploy from a branch**, p
 ## Things to update
 
 - **Phone / WhatsApp**: none is listed yet. Add one to the contact list in the "Get started" section.
-- **Lead form**: the form opens the visitor's email app with their details filled in, addressed to `aarondispatchservice@gmail.com`. To receive submissions without that step, connect a form service like Formspree and point the form at it.
-- **First week at 0%**: remove the hero card and the FAQ entry if the offer ends.
+- **Lead form**: submissions are sent from the page through [FormSubmit](https://formsubmit.co) (free, no account) and arrive as emails at `aarondispatchservice@gmail.com`. The very first submission triggers a one-time activation email from FormSubmit: click the link in it, and every submission after that is delivered. To change the receiving address, edit `CONTACT_EMAIL` in `script.js`.
 - **Testimonials / load of the week**: add a section once you have real client results.

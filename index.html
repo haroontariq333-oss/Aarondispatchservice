@@ -57,11 +57,11 @@
           <li>No setup or weekly fees</li>
         </ul>
       </div>
-      <div class="hero-card" aria-label="New client offer">
-        <div class="stop" aria-hidden="true"><span>0%</span></div>
-        <p class="hero-card-title">First week at 0%</p>
-        <p>New clients pay nothing on their first week of loads. Try us with zero risk.</p>
-        <a class="link-arrow" href="#start">Claim your first week</a>
+      <div class="hero-card" aria-label="No load, no fee">
+        <div class="stop" aria-hidden="true"><span>$0</span></div>
+        <p class="hero-card-title">No load, no fee</p>
+        <p>You only pay 5% on loads you actually haul. No setup fee, no weekly minimum, nothing for weeks you take off.</p>
+        <a class="link-arrow" href="#start">Get your free lane audit</a>
       </div>
     </div>
     <svg class="hero-truck" viewBox="0 0 2200 440" aria-hidden="true">
@@ -186,7 +186,7 @@
           <li>No setup fee</li>
           <li>No weekly minimum</li>
           <li>No cut of detention, layover or TONU</li>
-          <li>First week at 0% for new clients</li>
+          <li>Pay only on loads you haul</li>
         </ul>
       </div>
       <div class="calc" aria-labelledby="calc-h">
@@ -323,8 +323,8 @@
           <p>Your W9, MC certificate and certificate of insurance (COI). If you use a factoring company, send their details too and we'll invoice them directly.</p>
         </details>
         <details>
-          <summary>How does the first week at 0% work?</summary>
-          <p>For new clients, we don't charge our fee on loads you haul during your first week with us. After that it's 5% flat.</p>
+          <summary>Do I pay anything if you don't find me a load?</summary>
+          <p>No. You only pay 5% on loads you actually haul. There's no weekly minimum and no charge for weeks you take off.</p>
         </details>
       </div>
     </div>
@@ -367,6 +367,10 @@
             <input id="f-mc" name="mc" type="text" inputmode="numeric">
           </div>
         </div>
+        <div class="field">
+          <label for="f-email">Email <span class="opt">(optional)</span></label>
+          <input id="f-email" name="email" type="email" autocomplete="email">
+        </div>
         <div class="field-row">
           <div class="field">
             <label for="f-equip">Equipment</label>
@@ -390,12 +394,21 @@
           <label for="f-notes">Anything else? <span class="opt">(optional)</span></label>
           <textarea id="f-notes" name="notes" rows="3" placeholder="Preferred lanes, home time, number of trucks…"></textarea>
         </div>
+        <div class="hp" aria-hidden="true">
+          <label for="f-hp">Leave this empty</label>
+          <input id="f-hp" name="_honey" type="text" tabindex="-1" autocomplete="off">
+        </div>
         <button class="btn btn-block" type="submit">
           Send my details
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
         </button>
         <p class="form-msg" id="form-msg" role="status" aria-live="polite"></p>
       </form>
+      <div class="lead-form form-done" id="form-done" tabindex="-1" hidden>
+        <div class="stop" aria-hidden="true"><span>✓</span></div>
+        <h3>Got it. Thanks!</h3>
+        <p>We've received your details. Aaron will reach out within 24 hours with 3 lanes paying well out of your area.</p>
+      </div>
     </div>
   </section>
 

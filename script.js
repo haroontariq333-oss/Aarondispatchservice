@@ -31,11 +31,15 @@
   gross.addEventListener('input', updateCalc);
   updateCalc();
 
-  // Lead form: opens the visitor's email app with the details filled in.
+  // Lead form: submitted from the page via FormSubmit, delivered to CONTACT_EMAIL.
   var form = document.getElementById('lead-form');
   var msg = document.getElementById('form-msg');
+  var done = document.getElementById('form-done');
+  var submitBtn = form.querySelector('button[type="submit"]');
+  var submitLabel = submitBtn.innerHTML;
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    if (submitBtn.disabled) return;
     var firstInvalid = null;
     Array.prototype.forEach.call(form.querySelectorAll('[required]'), function (el) {
       var bad = !el.value.trim();
@@ -48,22 +52,58 @@
       firstInvalid.focus();
       return;
     }
+    var email = form.elements.email;
+    if (email.value.trim() && !email.checkValidity()) {
+      email.setAttribute('aria-invalid', 'true');
+      msg.textContent = 'Please check your email address, or leave it blank.';
+      msg.className = 'form-msg err';
+      email.focus();
+      return;
+    }
+    email.setAttribute('aria-invalid', 'false');
+
     var d = new FormData(form);
-    var body = [
-      'Name: ' + d.get('name'),
-      'Phone: ' + d.get('phone'),
-      'MC number: ' + (d.get('mc') || '-'),
-      'Equipment: ' + d.get('equipment'),
-      'Home base: ' + d.get('base'),
-      '',
-      d.get('notes') || ''
-    ].join('\n');
-    var subject = 'Free lane audit request: ' + d.get('equipment') + ' out of ' + d.get('base');
-    window.location.href = 'mailto:' + CONTACT_EMAIL +
-      '?subject=' + encodeURIComponent(subject) +
-      '&body=' + encodeURIComponent(body);
-    msg.textContent = 'Your email app should open with your details. Just hit send. Or email us at ' + CONTACT_EMAIL + '.';
+    if (d.get('_honey')) return;
+    var payload = {
+      _subject: 'New carrier lead: ' + d.get('equipment') + ' out of ' + d.get('base'),
+      _template: 'table',
+      Name: d.get('name'),
+      Phone: d.get('phone'),
+      'MC number': d.get('mc') || '-',
+      Equipment: d.get('equipment'),
+      'Home base': d.get('base'),
+      Notes: d.get('notes') || '-'
+    };
+    if (d.get('email')) payload.email = d.get('email');
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    msg.textContent = '';
     msg.className = 'form-msg';
+
+    fetch('https://formsubmit.co/ajax/' + CONTACT_EMAIL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(function (res) {
+        return res.json().catch(function () { return {}; }).then(function (data) {
+          if (!res.ok || String(data.success) !== 'true') throw new Error(data.message || 'Request failed');
+        });
+      })
+      .then(function () {
+        form.hidden = true;
+        done.hidden = false;
+        done.focus();
+      })
+      .catch(function () {
+        msg.textContent = 'Sorry, something went wrong. Please try again, or email us at ' + CONTACT_EMAIL + '.';
+        msg.className = 'form-msg err';
+      })
+      .then(function () {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = submitLabel;
+      });
   });
 
   document.getElementById('year').textContent = new Date().getFullYear();
