@@ -22,5 +22,6 @@ Repo **Settings → Pages → Build and deployment → Deploy from a branch**, p
 ## Things to update
 
 - **Phone / WhatsApp**: none is listed yet. Add one to the contact list in the "Get started" section.
-- **Lead form**: submissions are sent from the page through [FormSubmit](https://formsubmit.co) (free, no account) and arrive as emails at `aarondispatchservice@gmail.com`. The very first submission triggers a one-time activation email from FormSubmit: click the link in it, and every submission after that is delivered. To change the receiving address, edit `CONTACT_EMAIL` in `script.js`.
+- **Lead form**: submissions are sent from the page through [FormSubmit](https://formsubmit.co) (free, no account) and arrive as emails at `aarondispatchservice@gmail.com`. The very first submission triggers a one-time activation email from FormSubmit: click the link in it, and every submission after that is delivered. To change the receiving address, edit `CONTACT_EMAIL` in `script.js` and the form's `action` in `index.html`.
+- **After editing `styles.css` or `script.js`**: bump the `?v=` number on their links in `index.html` so visitors' browsers load the new version instead of a cached one.
 - **Testimonials / load of the week**: add a section once you have real client results.
